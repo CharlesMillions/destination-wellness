@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destination Wellness | Holistic Health Network</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #2D5A4A;
+            --secondary-green: #4A8B6F;
+            --accent-green: #7BC4A8;
+            --water-blue: #5DADE2;
+            --bg-light: #F8FAF9;
+            --text-dark: #1A3329;
+            --text-light: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+        }
+
+        /* Bubbles Animation */
+        .bubbles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(93, 173, 226, 0.3), rgba(93, 173, 226, 0.05));
+            backdrop-filter: blur(2px);
+            animation: float linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(45, 90, 74, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo svg {
+            width: 40px;
+            height: 40px;
+        }
+
+        .logo-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-light);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-green);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(123, 196, 168, 0.1) 0%, transparent 50%);
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--accent-green);
+            color: var(--text-dark);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background: var(--text-light);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Leaf Decorations */
+        .leaf {
+            position: absolute;
+            opacity: 0.15;
+            fill: var(--accent-green);
+        }
+
+        .leaf-1 {
+            top: 10%;
+            left: 5%;
+            width: 150px;
+            transform: rotate(-15deg);
+            animation: sway 4s ease-in-out infinite;
+        }
+
+        .leaf-2 {
+            bottom: 15%;
+            right: 8%;
+            width: 120px;
+            transform: rotate(20deg);
+            animation: sway 5s ease-in-out infinite reverse;
+        }
+
+        @keyframes sway {
+            0%, 100% { transform: rotate(-15deg) translateX(0); }
+            50% { transform: rotate(-10deg) translateX(10px); }
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--secondary-green);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* About Section */
+        .about {
+            background: var(--bg-light);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+        }
+
+        .about-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .about-visual svg {
+            width: 200px;
+            height: 200px;
+            fill: var(--secondary-green);
+            opacity: 0.3;
+        }
+
+        /* Network Section */
+        .network {
+            background: linear-gradient(180deg, var(--bg-light) 0%, rgba(123, 196, 168, 0.1) 100%);
+        }
+
+        .network-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .practitioner-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(45, 90, 74, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .practitioner-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(45, 90, 74, 0.15);
+        }
+
+        .card-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--secondary-green), var(--accent-green));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-image::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 10 C30 30 20 50 50 90 C80 50 70 30 50 10' fill='none' stroke='rgba(255,255,255,0.2)' stroke-width='2'/%3E%3C/svg%3E") center/contain no-repeat;
+        }
+
+        .card-image .initials {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            opacity: 0.8;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-content h3 {
+            font-size: 1.25rem;
+            color: var(--primary-green);
+            margin-bottom: 0.25rem;
+        }
+
+        .card-content .title {
+            color: var(--secondary-green);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .card-content .specialty {
+            color: var(--text-dark);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Services Section */
+        .services {
+            background: var(--primary-green);
+            color: var(--text-light);
+        }
+
+        .services .section-title {
+            color: var(--text-light);
+        }
+
+        .services .section-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .service-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            fill: var(--accent-green);
+        }
+
+        .service-item h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-item p {
+            opacity: 0.8;
+            font-size: 0.95rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--bg-light);
+        }
+
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-details {
+            list-style: none;
+        }
+
+        .contact-details li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .contact-details svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--secondary-green);
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(45, 90, 74, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid rgba(45, 90, 74, 0.2);
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary-green);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-green);
+            color: var(--text-light);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--accent-green);
+        }
+
+        .social-links svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--text-light);
+        }
+
+        footer p {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .about-content,
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .about-visual {
+                order: -1;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            section {
+                padding: 3rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Bubbles -->
+    <div class="bubbles" id="bubbles"></div>
+
+    <!-- Leaf Decorations -->
+    <svg class="leaf leaf-1" viewBox="0 0 100 100">
+        <path d="M50 5 C25 25 10 50 50 95 C90 50 75 25 50 5 Z"/>
+    </svg>
+    <svg class="leaf leaf-2" viewBox="0 0 100 100">
+        <path d="M50 5 C25 25 10 50 50 95 C90 50 75 25 50 5 Z"/>
+    </svg>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <svg viewBox="0 0 40 40" fill="none">
+                <path d="M20 5 C12 15 8 25 20 35 C32 25 28 15 20 5 Z" fill="#7BC4A8"/>
+                <path d="M20 10 C15 18 12 25 20 32 C28 25 25 18 20 10 Z" fill="#4A8B6F"/>
+            </svg>
+            <span class="logo-text">Destination Wellness</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#network">Our Network</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Your Journey to Wellness Starts Here</h1>
+            <p>Connect with a network of trusted naturopathic doctors and holistic health advisors dedicated to your complete well-being.</p>
+            <a href="#network" class="btn">Find Your Health Advisor</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">Welcome to Destination Wellness</h2>
+            <p class="section-subtitle">A holistic approach to health that nurtures your mind, body, and spirit.</p>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <p>At Destination Wellness, we believe that true health comes from addressing the whole person—not just symptoms, but the root cause of imbalance. Our network connects you with qualified practitioners who honor this philosophy.</p>
+                    <p>Whether you're seeking naturopathic care, nutritional guidance, herbal medicine, or holistic lifestyle coaching, our community of health professionals is here to support your unique healing journey.</p>
+                    <p>We curate relationships with practitioners who share our commitment to integrative, patient-centered care.</p>
+                </div>
+                <div class="about-visual">
+                    <svg viewBox="0 0 200 200">
+                        <path d="M100 20 C60 50 40 90 100 180 C160 90 140 50 100 20 Z"/>
+                        <path d="M100 40 C75 60 60 95 100 160 C140 95 125 60 100 40 Z"/>
+                        <path d="M100 60 C85 75 75 100 100 140 C125 100 115 75 100 60 Z"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Network Section -->
+    <section class="network" id="network">
+        <div class="container">
+            <h2 class="section-title">Our Network</h2>
+            <p class="section-subtitle">Meet the qualified holistic health professionals in our community.</p>
+            
+            <div class="network-grid">
+                <div class="practitioner-card">
+                    <div class="card-image">
+                        <span class="initials">MD</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Dr. Sarah Mitchell</h3>
+                        <p class="title">Naturopathic Doctor</p>
+                        <p class="specialty">Functional Medicine • Herbal Medicine • Integrative Care</p>
+                    </div>
+                </div>
+
+                <div class="practitioner-card">
+                    <div class="card-image">
+                        <span class="initials">HA</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Marcus Chen</h3>
+                        <p class="title">Holistic Health Advisor</p>
+                        <p class="specialty">Nutrition • Lifestyle Medicine • Stress Management</p>
+                    </div>
+                </div>
+
+                <div class="practitioner-card">
+                    <div class="card-image">
+                        <span class="initials">ND</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Dr. Elena Rodriguez</h3>
+                        <p class="title">Naturopathic Doctor</p>
+                        <p class="specialty">Homeopathy • Botanical Medicine • Women's Health</p>
+                    </div>
+                </div>
+
+                <div class="practitioner-card">
+                    <div class="card-image">
+                        <span class="initials">WC</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>James Thompson</h3>
+                        <p class="title">Wellness Coach</p>
+                        <p class="specialty">Mind-Body Medicine • Yoga Therapy • Holistic Living</p>
+                    </div>
+                </div>
+
+                <div class="practitioner-card">
+                    <div class="card-image">
+                        <span class="initials">HA</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Priya Patel</h3>
+                        <p class="title">Holistic Health Advisor</p>
+                        <p class="specialty">Ayurveda • Dietary Counseling • Preventive Care</p>
+                    </div>
+                </div>
+
+                <div class="practitioner-card">
+                    <div class="card-image">
+                        <span class="initials">ND</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Dr. Michael Foster</h3>
+                        <p class="title">Naturopathic Doctor</p>
+                        <p class="specialty">Environmental Medicine • Chronic Conditions • Detoxification</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <p class="section-subtitle">Comprehensive holistic health services tailored to your needs.</p>
+            
+            <div class="services-grid">
+                <div class="service-item">
+                    <svg class="service-icon" viewBox="0 0 60 60">
+                        <path d="M30 5 C20 20 15 30 30 55 C45 30 40 20 30 5 Z"/>
+                    </svg>
+                    <h3>Naturopathic Care</h3>
+                    <p>Natural medicine approaches that address root causes and support the body's innate healing abilities.</p>
+                </div>
+
+                <div class="service-item">
+                    <svg class="service-icon" viewBox="0 0 60 60">
+                        <circle cx="30" cy="30" r="20" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <path d="M30 15 C22 22 18 30 30 45 C42 30 38 22 30 15 Z"/>
+                    </svg>
+                    <h3>Nutritional Guidance</h3>
+                    <p>Personalized nutrition plans and dietary counseling to optimize your health and energy.</p>
+                </div>
+
+                <div class="service-item">
+                    <svg class="service-icon" viewBox="0 0 60 60">
+                        <path d="M20 50 L20 25 L30 15 L40 25 L40 50 Z"/>
+                        <circle cx="30" cy="35" r="8"/>
+                    </svg>
+                    <h3>Herbal Medicine</h3>
+                    <p>Traditional and modern herbal remedies to support wellness and treat various conditions.</p>
+                </div>
+
+                <div class="service-item">
+                    <svg class="service-icon" viewBox="0 0 60 60">
+                        <circle cx="30" cy="30" r="20" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <path d="M20 30 Q30 20 40 30 Q50 40 40 50 Q30 60 20 50 Q10 40 20 30"/>
+                    </svg>
+                    <h3>Lifestyle Coaching</h3>
+                    <p>Guidance on stress management, sleep optimization, and creating balanced daily habits.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Get in Touch</h2>
+            <p class="section-subtitle">Ready to begin your wellness journey? We'd love to hear from you.</p>
+            
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <p>Reach out to learn more about our network of practitioners or to schedule a consultation.</p>
+                    <ul class="contact-details">
+                        <li>
+                            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                            <span>hello@destinationwellness.com</span>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                            <span>(555) 123-4567</span>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                            <span>Serving clients nationwide</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" placeholder="Enter your name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" placeholder="Enter your email">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" placeholder="Tell us about your health goals..."></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">Destination Wellness</div>
+        <div class="social-links">
+            <a href="#">
+                <svg viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>
+            </a>
+            <a href="#">
+                <svg viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>
+            </a>
+            <a href="#">
+                <svg viewBox="0 0 24 24"><path d="M22.46 6c-.85.38-1.78.64-2.75.76 1-.6 1.76-1.55 2.12-2.68-.93.55-1.96.95-3.06 1.17-.88-.94-2.13-1.53-3.51-1.53-2.66 0-4.81 2.16-4.81 4.81 0 .38.04.75.13 1.1-4-.2-7.58-2.11-9.96-5.02-.42.72-.66 1.56-.66 2.46 0 1.68.85 3.16 2.14 4.02-.79-.02-1.53-.24-2.18-.6v.06c0 2.35 1.67 4.31 3.88 4.76-.4.1-.83.16-1.27.16-.31 0-.62-.03-.92-.08.63 1.96 2.45 3.39 4.61 3.43-1.69 1.32-3.83 2.1-6.15 2.1-.4 0-.8-.02-1.19-.07 2.19 1.4 4.78 2.22 7.57 2.22 9.07 0 14.02-7.52 14.02-14.02 0-.21 0-.43-.01-.64.96-.69 1.79-1.56 2.45-2.55z"/></svg>
+            </a>
+        </div>
+        <p>&copy; 2026 Destination Wellness. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Create floating bubbles
+        function createBubbles() {
+            const bubblesContainer = document.getElementById('bubbles');
+            const bubbleCount = 15;
+            
+            for (let i = 0; i < bubbleCount; i++) {
+                const bubble = document.createElement('div');
+                bubble.classList.add('bubble');
+                
+                const size = Math.random() * 60 + 20;
+                const left = Math.random() * 100;
+                const duration = Math.random() * 15 + 10;
+                const delay = Math.random() * 15;
+                
+                bubble.style.width = size + 'px';
+                bubble.style.height = size + 'px';
+                bubble.style.left = left + '%';
+                bubble.style.animationDuration = duration + 's';
+                bubble.style.animationDelay = delay + 's';
+                
+                bubblesContainer.appendChild(bubble);
+            }
+        }
+        
+        createBubbles();
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(45, 90, 74, 0.98)';
+            } else {
+                nav.style.background = 'rgba(45, 90, 74, 0.95)';
+            }
+        });
+    </script>
+</body>
+</html>
