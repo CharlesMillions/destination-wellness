@@ -413,6 +413,99 @@
             font-size: 0.95rem;
         }
 
+        /* Booking Section */
+        .booking {
+            background: linear-gradient(180deg, var(--bg-light) 0%, rgba(123, 196, 168, 0.15) 100%);
+        }
+
+        .booking-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .booking-intro h3 {
+            font-size: 1.5rem;
+            color: var(--primary-green);
+            margin-bottom: 1.5rem;
+        }
+
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--secondary-green);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .step h4 {
+            font-size: 1.1rem;
+            color: var(--primary-green);
+            margin-bottom: 0.25rem;
+        }
+
+        .step p {
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            opacity: 0.8;
+        }
+
+        .booking-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(45, 90, 74, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .booking-form .form-group input,
+        .booking-form .form-group select,
+        .booking-form .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid rgba(45, 90, 74, 0.2);
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            background: white;
+        }
+
+        .booking-form .form-group input:focus,
+        .booking-form .form-group select:focus,
+        .booking-form .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary-green);
+        }
+
+        .booking-form .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
         /* Contact Section */
         .contact {
             background: var(--bg-light);
@@ -547,7 +640,21 @@
             }
 
             .about-content,
-            .contact-wrapper {
+            .contact-wrapper,
+            .booking-wrapper {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .booking-intro {
+                order: -1;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .about-content,
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
@@ -594,6 +701,7 @@
         <ul class="nav-links">
             <li><a href="#about">About</a></li>
             <li><a href="#network">Our Network</a></li>
+            <li><a href="#booking">Book Now</a></li>
             <li><a href="#services">Services</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
@@ -752,6 +860,101 @@
         </div>
     </section>
 
+    <!-- Booking Section -->
+    <section class="booking" id="booking">
+        <div class="container">
+            <h2 class="section-title">Book Your Session</h2>
+            <p class="section-subtitle">Schedule a consultation with one of our holistic health professionals.</p>
+            
+            <div class="booking-wrapper">
+                <div class="booking-intro">
+                    <h3>How It Works</h3>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <h4>Choose Your Service</h4>
+                            <p>Select the type of consultation you're looking for</p>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <h4>Pick a Practitioner</h4>
+                            <p>Choose from our network of qualified professionals</p>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <h4>Select Date & Time</h4>
+                            <p>Find a time that works for your schedule</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="booking-form">
+                    <form id="bookingForm">
+                        <div class="form-group">
+                            <label for="bookingName">Your Name *</label>
+                            <input type="text" id="bookingName" required placeholder="Enter your full name">
+                        </div>
+                        <div class="form-group">
+                            <label for="bookingEmail">Email Address *</label>
+                            <input type="email" id="bookingEmail" required placeholder="Enter your email">
+                        </div>
+                        <div class="form-group">
+                            <label for="bookingPhone">Phone Number *</label>
+                            <input type="tel" id="bookingPhone" required placeholder="(555) 123-4567">
+                        </div>
+                        <div class="form-group">
+                            <label for="serviceType">Service Type *</label>
+                            <select id="serviceType" required>
+                                <option value="">Select a service...</option>
+                                <option value="naturopathic">Naturopathic Consultation</option>
+                                <option value="nutrition">Nutritional Counseling</option>
+                                <option value="herbal">Herbal Medicine Consultation</option>
+                                <option value="wellness">Wellness Coaching Session</option>
+                                <option value="initial">Initial Health Assessment</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="practitioner">Preferred Practitioner</label>
+                            <select id="practitioner">
+                                <option value="">Any available practitioner</option>
+                                <option value="dr-mitchell">Dr. Sarah Mitchell</option>
+                                <option value="marcus-chen">Marcus Chen</option>
+                                <option value="dr-rodriguez">Dr. Elena Rodriguez</option>
+                                <option value="james-thompson">James Thompson</option>
+                                <option value="priya-patel">Priya Patel</option>
+                                <option value="dr-foster">Dr. Michael Foster</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="bookingDate">Preferred Date *</label>
+                                <input type="date" id="bookingDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="bookingTime">Preferred Time *</label>
+                                <select id="bookingTime" required>
+                                    <option value="">Select time...</option>
+                                    <option value="09:00">9:00 AM</option>
+                                    <option value="10:00">10:00 AM</option>
+                                    <option value="11:00">11:00 AM</option>
+                                    <option value="13:00">1:00 PM</option>
+                                    <option value="14:00">2:00 PM</option>
+                                    <option value="15:00">3:00 PM</option>
+                                    <option value="16:00">4:00 PM</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="bookingNotes">Tell Us About Your Health Goals</label>
+                            <textarea id="bookingNotes" placeholder="What would you like to address in your session?"></textarea>
+                        </div>
+                        <button type="submit" class="btn">Request Appointment</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section class="contact" id="contact">
         <div class="container">
@@ -865,6 +1068,31 @@
                 nav.style.background = 'rgba(45, 90, 74, 0.95)';
             }
         });
+
+        // Booking form submission
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('bookingName').value,
+                email: document.getElementById('bookingEmail').value,
+                phone: document.getElementById('bookingPhone').value,
+                serviceType: document.getElementById('serviceType').value,
+                practitioner: document.getElementById('practitioner').value || 'Any available',
+                date: document.getElementById('bookingDate').value,
+                time: document.getElementById('bookingTime').value,
+                notes: document.getElementById('bookingNotes').value
+            };
+            
+            // Show confirmation
+            alert('Thank you! Your booking request has been submitted. We will contact you within 24 hours to confirm your appointment.');
+            this.reset();
+        });
+
+        // Set minimum date to today
+        const dateInput = document.getElementById('bookingDate');
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.setAttribute('min', today);
     </script>
 </body>
 </html>
