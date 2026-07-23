@@ -1,6 +1,6 @@
+headersOrigin = "config"
+redirectsOrigin = "config"
 plugins = []
-headers = []
-redirects = []
 
 [functions]
 
@@ -8,7 +8,7 @@ redirects = []
 
 [build]
 publish = "/home/openclaw/.openclaw/workspace/destination-wellness"
-publishOrigin = "default"
+publishOrigin = "config"
 
 [build.environment]
 
@@ -23,3 +23,24 @@ publishOrigin = "default"
 [build.processing.js]
 
 [build.services]
+
+[[headers]]
+for = "/*"
+
+[headers.values]
+X-Frame-Options = "DENY"
+X-XSS-Protection = "1; mode=block"
+X-Content-Type-Options = "nosniff"
+Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
